@@ -5,8 +5,20 @@
 <!-- Write content for each page here -->
  <h1>id = {{ $task->id }} のタスク詳細ページ</h1>
 
-    <p>タイトル: {{ $task->status }}</p>
-    <p>{{ $task->content }}</p>
+     <table class="table table-bordered">
+        <tr>
+            <th>id</th>
+            <td>{{ $task->id }}</td>
+        </tr>
+        <tr>
+            <th>タイトル</th>
+            <td>{{ $task->status }}</td>
+        </tr>
+        <tr>
+            <th>メッセージ</th>
+            <td>{{ $task->content }}</td>
+        </tr>
+    </table>
     
         {!! link_to_route('tasks.edit', 'このタスクを編集', ['id' => $task->id]) !!}
         

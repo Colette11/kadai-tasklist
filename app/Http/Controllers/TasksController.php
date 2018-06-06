@@ -55,7 +55,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
 
-        return redirect('/');
+        return redirect('/')->with('message','登録完了しました');
     }
 
     /**

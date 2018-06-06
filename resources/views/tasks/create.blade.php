@@ -19,7 +19,7 @@
                     </div>
                 
     
-            {!! Form::submit('投稿') !!}
+            {!! Form::submit('投稿',['class'=>"btn btn-danger"]) !!}
     
             {!! Form::close() !!}
                 </div>

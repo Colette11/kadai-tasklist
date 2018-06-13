@@ -29,9 +29,14 @@ class UsersController extends Controller
     {
         $task = Task::find($id);
 
+        if(\Auth::user()->id === $task->user_id){
+
         return view('tasks.edit', [
             'task' => $task,
         ]);
+        }
+        
+        return redirect('/');
         
     }
 }

@@ -17,14 +17,14 @@
                 </p>
             </div>
             <div class='col-xs-1'>
-                @if (Auth::user()->id == $task->user_id)
+                @if (Auth::user()->id === $task->user_id)
                     {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                 @endif
              </div>
              <div class='col-xs-11'>
-                 @if (Auth::user()->id == $task->user_id)
+                 @if (Auth::user()->id === $task->user_id)
                      {!! Form::open(['route' => ['users.edit', $task->id], 'method' => 'put']) !!}
                         {!! Form::submit('Edit', ['class' => 'btn btn-warning btn-xs']) !!}
                     {!! Form::close() !!}

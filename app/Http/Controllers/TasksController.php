@@ -8,6 +8,8 @@ use App\Http\Requests;
 
 use App\Task;
 
+use Auth;
+
 class TasksController extends Controller
 {
     /**
@@ -33,26 +35,8 @@ class TasksController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     $task = new Task;
 
-    //     return view('tasks.create', [
-    //         'task' => $task,
-    //     ]);
-    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
          $this->validate($request, [
@@ -74,14 +58,6 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $task = Task::find($id);
-
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -89,22 +65,7 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-         $task = Task::find($id);
 
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [

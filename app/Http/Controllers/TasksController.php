@@ -17,11 +17,20 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+       $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+            $data += $this->counts($user);
+            return view('tasks.show', $data);
+        }else {
+            return view('welcome');
+        }
     }
 
     /**
@@ -29,14 +38,14 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $task = new Task;
+    // public function create()
+    // {
+    //     $task = new Task;
 
-        return view('tasks.create', [
-            'task' => $task,
-        ]);
-    }
+    //     return view('tasks.create', [
+    //         'task' => $task,
+    //     ]);
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -50,12 +59,13 @@ class TasksController extends Controller
             'status' => 'required|max:10',   // add
             'content' => 'required|max:191',
         ]);
-        $task = new Task;
-        $task->status = $request->status;    // add
-        $task->content = $request->content;
-        $task->save();
+        
+         $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status,
+        ]);
 
-        return redirect('/')->with('message','登録完了しました');
+        return redirect()->back()->with('message', __('You added a new task!'));
     }
 
     /**
